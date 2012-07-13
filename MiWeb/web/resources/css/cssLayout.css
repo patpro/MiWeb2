@@ -1,0 +1,186 @@
+#top {
+    position: relative;
+    background-color: #036fab;
+    color: white;
+    padding: 5px;
+    margin: 0px 0px 5px 0px;
+    -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+#toplogin {
+    position: relative;
+    background-color: #036fab;
+    color: white;
+    opacity:0.9;
+    
+    padding: 5px;
+    margin: 0px 0px 5px 0px;
+    -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+#bottonlogin {
+    position: relative;
+    margin: 20px 20px 50px 20px;
+    background-color: #036fab;
+    color: white;
+    opacity:0.9;
+    text-align: center;
+    padding: 5px;
+    margin: 0px 0px 5px 0px;
+    -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+#bottongeneral {
+    position: relative;
+    margin: 20px 20px 50px 20px;
+    background-color: #036fab;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    margin: 0px 0px 5px 0px;
+    -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+#center {
+    position: relative;
+    background-color: #ffffff;
+    color: white;
+    padding: 5px;
+    margin: 0px 0px 5px 0px;
+    -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+#login {
+    opacity: 0;
+    -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+#bottom {
+    position: relative;
+    padding: 1px;
+    margin: 10px 5px 0px 0px;
+    -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;    
+    font-family: 'Times New Roman',Times,serif;
+    font-style: normal;
+    color: #19529f;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#left {
+    float: left;
+    background-color: #036fab;
+    padding: 5px;
+    width: 180px;
+    margin: 0px 0px 0px 0px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+#menu_contorno{
+    float: left;
+    background-color: #036fab;
+    padding: 5px;
+    width: 180px;
+    color: white;
+    margin-bottom: 2px;
+}
+
+#right {
+    float: right;
+    background-color: #ece3a5;
+    padding: 5px;
+    
+}
+
+.contenido_menu {
+    position: relative;
+    padding: 2px;
+    -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  
+}
+
+.center_content {
+    position: relative;
+    
+    padding: 2px;
+    -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  
+}
+
+.inicio_content {
+    background-image:url(../resources/imagenes/findex.jpg);
+    padding: 2px;
+    margin: 0px 0px 0px 0px;
+    height: 625px;
+    -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+.schedule_content {
+    background-color: #dddddd;
+    padding: 0px;
+    margin: 0px 0px 0px 190px;
+    
+    -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+.left_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin-left: 170px;
+    -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+.login_content {
+    background-color: #dddddd;
+    margin-left: 570px;
+    -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+.right_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin: 0px 0px 0px 200px;
+    -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+#top a:link, #top a:visited {
+  color: white;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+#top a:link:hover, #top a:visited:hover  {
+  color: black;
+  font-weight : bold;
+  text-decoration : underline;
+}
+
+

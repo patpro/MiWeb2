@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="/Contenido/Publico/T_general.xhtml">
+        <ui:define name="top">
+            <h2>webStore - Administrador</h2>
+        </ui:define> 
+
+        <ui:define name="Menu">
+            <ui:include src="/Contenido/Publico/menu.xhtml" />
+        </ui:define> 
+
+        <ui:define name="right">
+            <h:form id="form">
+
+                <p:panel>
+                    <p:fieldset legend="Ingresar Categoria">
+                        <h:panelGrid columns="1" cellpadding="10">
+                            <p:growl id="messages" showDetail="true" />  
+
+                            <h:panelGrid id="ingresocateg" columns="2" columnClasses="label, value" styleClass="grid">
+                                <h:outputLabel value="Descripcion :" for="txt_title" styleClass="requiredLbl"></h:outputLabel>
+                                <p:inputText id="txt_title" value="#{mantenimientoCategoria.categoria.descripcion}" required="true"/>
+
+                                <p:commandButton id="confirm" value="Agregar" actionListener="#{mantenimientoCategoria.GuardarCategoria}" update="tablaCategorias,messages"/>
+                                <p:commandButton id="delete" value="Eliminar" actionListener="#{mantenimientoCategoria.EliminarCategoria}" ajax="true"/>    
+
+                            </h:panelGrid>
+                        </h:panelGrid>
+                    </p:fieldset>    
+                </p:panel>
+
+                <p:panel>
+                    <p:dataTable id="tablaCategorias" var="cate" value="#{mantenimientoCategoria.listaCategorias}" 
+                                 paginator="true" rows="5"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 >
+                        <f:facet name="header">
+                            Lista de Categorias
+                        </f:facet>
+                        <p:column headerText="Id Categoria" >
+                            <h:outputText value="#{cate.idcategoria}" />
+                        </p:column>
+
+                        <p:column headerText="Descripcion">
+                            <h:outputText value="#{cate.descripcion}" />
+                        </p:column>
+
+
+                        <p:column style="width:30px">
+                            <h:panelGrid columns="2" styleClass="actions" cellpadding="2">
+                                <p:commandButton id="selectButton"  icon="ui-icon-pencil" title="Ver Detalle">
+                                </p:commandButton> 
+                            </h:panelGrid> 
+                        </p:column>
+
+                    </p:dataTable>
+                   <!-- <p:dialog header="Actualizar categoria" widgetVar="carDialog" resizable="false" id="carDlg"
+                                      showEffect="fade" hideEffect="explode" modal="true">
+
+                                <h:panelGrid id="display" columns="1" cellpadding="4" style="margin:0 auto;">
+
+                                    <f:facet name="header"/>
+                                    
+                                    <h:outputText value="Categoria: " />
+                                    <p:inputText value="{mantenimientoCategoria.categoria.descripcion}" />
+
+
+                                </h:panelGrid>
+                                <br/>
+                                <center>
+                                    <p:commandButton id="btnActulizar" actionListener="{mantenimientoCategoria.actualizarCategoria(actionEvent)}" value="ACTUALIZAR"/>
+                                </center>
+                            </p:dialog> -->
+                </p:panel>
+            </h:form>
+
+
+
+        </ui:define> 
+        <ui:define name="botton">
+            © Copyright 2012 - Todos los derechos reservados
+        </ui:define>  
+    </ui:composition>
+</html>

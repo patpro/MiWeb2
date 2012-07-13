@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="/Contenido/Publico/T_general.xhtml">
+        <ui:define name="top">
+            <h2>webStore - Administrador</h2>
+        </ui:define> 
+        
+        <ui:define name="Menu">
+            <ui:include src="/Contenido/Publico/menu.xhtml" />
+        </ui:define> 
+        
+        <ui:define name="right">
+            <p:fieldset legend="Agregar Voucher" style="height:505px;">
+                <h:panelGrid columns="1" cellpadding="10" style="width: 100%">
+                    <h:form enctype="multipart/form-data">
+                        <p:growl id="messages" showDetail="true"/>
+                        <p:panel>  
+
+                        <p:fileUpload fileUploadListener="#{fileUploadController.handleFileUpload}"
+                                mode="advanced" 
+                                update="messages"
+                                sizeLimit="100000" 
+                                allowTypes="/(\.|\/)(txt)$/"/>
+
+
+                        </p:panel>      
+                    </h:form>
+                </h:panelGrid>
+            </p:fieldset>
+        </ui:define> 
+         <ui:define name="botton">
+            © Copyright 2012 - Todos los derechos reservados
+        </ui:define>  
+    </ui:composition>
+</html>

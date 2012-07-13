@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="Contenido/Publico/T_index.xhtml">
+        <ui:define name="top">
+            <h2>webStore</h2>
+        </ui:define> 
+        
+        <ui:define name="centro1">
+            
+            <h:panelGrid columns="2" style="width:700px;height:504px;">
+                
+            </h:panelGrid>
+                   
+        </ui:define>
+          
+        <ui:define name="login1">
+            <h:form> 
+                <p:growl id="growl" showDetail="true" sticky="true" />
+	<!--	<p:panel id="panel"> -->
+        <h:panelGrid columns="2" style="">
+            <h:panelGrid columns="3" style="margin: 0px 2px 5px 60px;">
+                <p:graphicImage value="../resources/imagenes/shoppingCar.png" height="60" /> 
+                <h:outputText value="webStore" style="font-size: 50px;" />  
+            </h:panelGrid>
+                    
+                    <h:panelGrid columns="4" style="margin: 0px 80px 2px 280px;">
+                        <h:panelGrid columns="2">
+                            <p:inputText id="idusuario"
+                                         value="#{loginBean.usuario.idUsuario}" required="true" label="Usuario" title="Usuario" styleClass="t">
+                                    <f:validateLength minimum="2" />
+                            </p:inputText>
+                            <p:watermark for="idusuario" value="Usuario" />
+                        </h:panelGrid>
+                        <h:panelGrid columns="2">
+                            <p:password id="pass" value="#{loginBean.usuario.pass}" required="true" label="Contraseña"/>
+                            <p:watermark for="pass" value="Contraseña" />
+                         </h:panelGrid>   
+                            <p:commandButton ajax="false" value="Login" action="#{loginBean.CheckValidUser}" update="growl"/> 
+                            <p:commandButton ajax="false" value="Registrate" action="registrar" update="growl"/>
+                            <p:selectOneRadio id="options" value="a">
+                                <f:selectItem itemLabel="Recordarme" itemValue="1" />
+                            </p:selectOneRadio>
+                            
+                            <p:commandLink id="nonAjax" actionListener="#{pprBean.savePerson}" ajax="false" style="color: white">
+                                    <h:outputText value="¿Olvidaste tu contraseña?" />
+                            </p:commandLink>
+                            
+                    </h:panelGrid>
+                    </h:panelGrid>
+	   <!--     </p:panel> -->	
+ 
+            </h:form>  
+        </ui:define> 
+         <ui:define name="botton">
+            © Copyright 2012 - Todos los derechos reservados 
+        </ui:define>  
+    </ui:composition>
+</html>
+

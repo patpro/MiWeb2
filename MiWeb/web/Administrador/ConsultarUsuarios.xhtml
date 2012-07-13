@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="/Contenido/Publico/T_general.xhtml">
+        <ui:define name="top">
+            <h2>webStore - Administrador</h2>
+        </ui:define> 
+        
+        <ui:define name="Menu">
+            <ui:include src="/Contenido/Publico/menu.xhtml" />
+        </ui:define> 
+        
+        <ui:define name="right">
+            <p:panel>
+            <p:fieldset legend="Consultar Vendedores" style="margin: 5px 5px 20px 5px">
+                <h:panelGrid columns="1" cellpadding="10" style="width: 100%">
+            <h:form id="form">
+                
+           
+            <p:growl id="msgs" showDetail="true" />
+
+            <p:dataTable id="prod" var="prod" value="#{tableBean.productos}" 
+                         paginator="true" rows="5"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15"
+                         style="margin: 5px 150px 20px 150px"
+                        >
+                <f:facet name="header">
+                    Vendedores
+                </f:facet>
+                <p:column headerText="Usuario" style="width: 390px">
+                    <h:outputText value="#{prod.cantidad}" />
+                </p:column>
+
+                <p:column headerText="Nombre" style="width: 450px">
+                    <h:outputText value="#{prod.precio} #{prod.descripcion}" />
+                </p:column>
+
+
+                <p:column style="width:30px">
+                    <h:panelGrid columns="3" styleClass="actions" cellpadding="2">
+                        <p:commandButton id="selectButton" update=":form:display" oncomplete="carDialog.show()" icon="ui-icon-search" title="Ver Detalle">
+                            <f:setPropertyActionListener value="#{prod}" target="#{tableBean.selectedPro}" />
+                        </p:commandButton>
+                    </h:panelGrid>
+                </p:column>
+
+            </p:dataTable>
+
+            <p:dialog header="Detalle de Usuario" widgetVar="carDialog" resizable="false" id="carDlg"
+                        showEffect="fade" hideEffect="explode" modal="true">
+
+                <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">
+
+                    <f:facet name="header">
+                        
+                    </f:facet>
+
+                    <h:outputText value="Cantidad:" />
+                    <h:outputText value="#{tableBean.selectedPro.cantidad}" style="font-weight:bold"/>
+
+                    <h:outputText value="Precio:" />
+                    <h:outputText value="#{tableBean.selectedPro.precio}" style="font-weight:bold"/>
+
+                    <h:outputText value="Descripcion:" />
+                    <h:outputText value="#{tableBean.selectedPro.descripcion}" style="font-weight:bold"/>
+
+                    <h:outputText value="Tipo:" />
+                    <h:outputText value="#{tableBean.selectedPro.tipo}" style="font-weight:bold"/>
+
+                </h:panelGrid>
+
+            </p:dialog>
+        </h:form>
+         </h:panelGrid>
+            </p:fieldset>
+            
+       <p:fieldset legend="Consultar Clientes">
+          <h:panelGrid columns="1" cellpadding="10" style="width: 100%">
+                <h:form id="form3">
+
+                    <p:growl id="msgs2" showDetail="true" />
+
+                    <p:dataTable id="prod2" var="prod" value="#{tableBean.productos}" 
+                                paginator="true" rows="5"
+                                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                rowsPerPageTemplate="5,10,15"
+                                style="margin: 5px 150px 5px 150px"
+                                >
+                        <f:facet name="header">
+                            Clientes
+                        </f:facet>
+                        <p:column headerText="Usuario" style="width: 390px">
+                            <h:outputText value="#{prod.cantidad}" />
+                        </p:column>
+
+                        <p:column headerText="Nombre" style="width: 450px">
+                            <h:outputText value="#{prod.precio} #{prod.descripcion}" />
+                        </p:column>
+
+
+                        <p:column style="width:30px">
+                            <h:panelGrid columns="3" styleClass="actions" cellpadding="2">
+                                <p:commandButton id="selectButton" update=":form:display" oncomplete="carDialog.show()" icon="ui-icon-search" title="Ver Detalle">
+                                    <f:setPropertyActionListener value="#{prod}" target="#{tableBean.selectedPro}" />
+                                </p:commandButton>
+                            </h:panelGrid>
+                        </p:column>
+
+                    </p:dataTable>
+
+                    <p:dialog header="Detalle de Usuario" widgetVar="carDialog" resizable="false" id="carDlg"
+                                showEffect="fade" hideEffect="explode" modal="true">
+
+                        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">
+
+                            <f:facet name="header">
+
+                            </f:facet>
+
+                            <h:outputText value="Cantidad:" />
+                            <h:outputText value="#{tableBean.selectedPro.cantidad}" style="font-weight:bold"/>
+
+                            <h:outputText value="Precio:" />
+                            <h:outputText value="#{tableBean.selectedPro.precio}" style="font-weight:bold"/>
+
+                            <h:outputText value="Descripcion:" />
+                            <h:outputText value="#{tableBean.selectedPro.descripcion}" style="font-weight:bold"/>
+
+                            <h:outputText value="Tipo:" />
+                            <h:outputText value="#{tableBean.selectedPro.tipo}" style="font-weight:bold"/>
+
+                        </h:panelGrid>
+
+                    </p:dialog>
+
+                </h:form> 
+                </h:panelGrid>
+            </p:fieldset>
+        </p:panel> 
+        </ui:define> 
+         <ui:define name="botton">
+            © Copyright 2012 - Todos los derechos reservados
+        </ui:define>  
+    </ui:composition>
+</html>

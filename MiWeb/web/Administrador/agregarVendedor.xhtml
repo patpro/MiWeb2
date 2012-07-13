@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="/Contenido/Publico/T_general.xhtml">
+        <ui:define name="top">
+            <h2>webStore - Administrador</h2>
+        </ui:define> 
+        
+        <ui:define name="Menu">
+            <ui:include src="/Contenido/Publico/menu.xhtml" />
+        </ui:define> 
+        
+        <ui:define name="right">
+            
+                   <p:growl id="messages" showDetail="true"/>
+                    <h:form>
+                        <p:fieldset legend="Agregar Vendedor" style="height:505px;">
+                            <h:panelGrid columns="1" cellpadding="10" style="width: 100%">
+                        <p:growl id="growl" sticky="true" showDetail="true"/>
+
+                                    <p:wizard widgetVar="wiz"
+                                                    flowListener="#{userWizard.onFlowProcess}">
+
+                                            <p:tab id="personal" title="Usuario">
+
+                                                    <p:panel header="Creación de Usuario">
+
+                                                            <h:messages errorClass="error"/>
+
+                                                            <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
+                                                                    <h:outputText value="Usuario:" styleClass="requiredLbl"/>
+                                                                    <p:inputText required="true" label="Firstname"
+                                                                                    value="#{userWizard.user.idUsuario}" />
+
+                                                                    <h:outputText value="Contraseña:" styleClass="requiredLbl"/>
+                                                                    <p:inputText required="true" label="Lastname"
+                                                                                    value="#{userWizard.user.idUsuario}" />
+
+                                                                    <h:outputText value="Confirmar Contraseña: " styleClass="requiredLbl"/>
+                                                                    <p:inputText value="#{userWizard.user.idUsuario}" />
+
+                                                                    <h:outputText value="Skip to last: " />
+                                                                    <h:selectBooleanCheckbox value="#{userWizard.skip}" />
+                                                            </h:panelGrid>
+                                                    </p:panel>
+                                            </p:tab>
+
+                                            <p:tab id="address" title="Datos Personales">
+                                                    <p:panel header="Ingreso de Datos Personales">
+
+                                                            <h:messages errorClass="error"/>
+
+                                                            <h:panelGrid columns="2" columnClasses="label, value">
+                                                                    <h:outputText value="Street: " />
+                                                                    <p:inputText value="#{userWizard.user.idUsuario}" />
+
+                                                                    <h:outputText value="Postal Code: " />
+                                                                    <p:inputText value="#{userWizard.user.idUsuario}" />
+
+                                                                    <h:outputText value="City: " />
+                                                                    <p:inputText value="#{userWizard.user.idUsuario}" />
+
+                                                                    <h:outputText value="Skip to last: " />
+                                                                    <h:selectBooleanCheckbox value="#{userWizard.skip}" />
+                                                            </h:panelGrid>
+                                                    </p:panel>
+                                            </p:tab>
+
+                                            <p:tab id="contact" title="Contacto">
+                                                    <p:panel header="Donde Contactar al Usuario">
+
+                                                            <h:messages errorClass="error"/>
+
+                                                            <h:panelGrid columns="2" columnClasses="label, value">
+                                                                    <h:outputText value="Email: *" />
+                                                                    <p:inputText required="true" label="Email"
+                                                                                    value="#{userWizard.user.idUsuario}" />
+
+                                                                    <h:outputText value="Phone: " />
+                                                                    <p:inputText value="#{userWizard.user.idUsuario}"/>
+
+                                                                    <h:outputText value="Additional Info: " />
+                                                                    <p:inputText value="#{userWizard.user.idUsuario}"/>
+                                                            </h:panelGrid>
+                                                    </p:panel>
+                                            </p:tab>
+
+                                            <p:tab id="confirm" title="Confirmacion">
+                                                    <p:panel header="Confirmacion de Datos">
+
+                                                            <h:panelGrid id="confirmation" columns="6">
+                                                                    <h:outputText value="Firstname: " />
+                                                                    <h:outputText styleClass="outputLabel"
+                                                                                            value="#{userWizard.user.idUsuario}" />
+
+                                                                    <h:outputText value="Lastname: " />
+                                                                    <h:outputText  styleClass="outputLabel"
+                                                                                            value="#{userWizard.user.idUsuario}"/>
+
+                                                                    <h:outputText value="Age: " />
+                                                                    <h:outputText styleClass="outputLabel"
+                                                                                            value="#{userWizard.user.idUsuario}" />>
+
+                                                                    <h:outputText value="Street: " />
+                                                                    <h:outputText styleClass="outputLabel"
+                                                                                            value="#{userWizard.user.idUsuario}" />
+
+                                                                    <h:outputText value="Postal Code: " />
+                                                                    <h:outputText styleClass="outputLabel"
+                                                                                            value="#{userWizard.user.idUsuario}" />
+
+                                                                    <h:outputText value="City: " />
+                                                                    <h:outputText styleClass="outputLabel"
+                                                                                            value="#{userWizard.user.idUsuario}" />
+
+                                                                    <h:outputText value="Email: " />
+                                                                    <h:outputText styleClass="outputLabel"
+                                                                                            value="#{userWizard.user.idUsuario}" />
+
+                                                                    <h:outputText value="Phone " />
+                                                                    <h:outputText styleClass="outputLabel"
+                                                                                            value="#{userWizard.user.idUsuario}"/>
+
+                                                                    <h:outputText value="Info: " />
+                                                                    <h:outputText styleClass="outputLabel"
+                                                                                            value="#{userWizard.user.idUsuario}" />
+
+                                                                    <h:outputText />
+                                                                    <h:outputText />
+                                                            </h:panelGrid>
+
+                                                            <p:commandButton value="Submit" update="growl" 
+                                                                                    actionListener="#{userWizard.save}"/>
+
+                                                    </p:panel>
+                                            </p:tab>
+
+                                    </p:wizard>
+
+                            
+                                </h:panelGrid>
+                        </p:fieldset>
+                    </h:form>
+        </ui:define> 
+         <ui:define name="botton">
+            © Copyright 2012 - Todos los derechos reservados
+        </ui:define>  
+    </ui:composition>
+</html>

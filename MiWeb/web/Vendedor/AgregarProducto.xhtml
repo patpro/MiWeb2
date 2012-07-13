@@ -1,0 +1,65 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="/Contenido/Publico/T_general.xhtml">
+        <ui:define name="top">
+            <h2>Registro de Productos</h2>
+        </ui:define>
+
+        <ui:define name="Menu">
+            <ui:include src="/Contenido/Publico/menu.xhtml" />
+        </ui:define>
+
+        <ui:define name="right">
+            <p:panel>
+
+                <p:fieldset legend="Ingresar Datos del Producto" style="margin: 5px 5px 20px 5px">
+                    <h:panelGrid columns="1" cellpadding="10" style="width: 100%">
+                        <h:form id="form">
+                            <p:growl id="msgs" showDetail="true" />
+
+                            <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
+
+                                <h:outputText value="Cantidad:" styleClass="requiredLbl"/>
+                                <p:inputText value="#{mantenimientoProducto.producto.cantidad}" />
+
+                                <h:outputText value="Descripcion:" styleClass="requiredLbl"/>
+                                <p:inputTextarea value="#{mantenimientoProducto.producto.descripcion}"
+                                                 styleClass="width:300px;"
+                                                 maxlength="499"/>
+
+                                <h:outputText value="Stock: " styleClass="requiredLbl"/>
+                                <p:inputText value="#{mantenimientoProducto.producto.stock}" />
+
+                                <h:outputText value="Precio de Venta: " styleClass="requiredLbl"/>
+                                <p:inputText value="#{mantenimientoProducto.producto.precVenta}" />
+
+
+
+                                <h:outputText value="Categoria"/>
+                                <p:selectOneMenu value="#{mantenimientoProducto.producto.idCategoria}">
+                                    <f:selectItem itemLabel="Categoria" itemValue="-1"/>
+                                    <f:selectItems value="#{mantenimientoProducto.comboCategorias.listCategorias}" />
+                                </p:selectOneMenu>
+                            </h:panelGrid>
+
+                            <p:commandButton id="btnGuardar" value="GUARDAR" actionListener="#{mantenimientoProducto.guardarProducto}"  partialSubmit="true" update="form"/>
+
+                        </h:form>
+                    </h:panelGrid>
+                </p:fieldset>
+
+
+
+
+            </p:panel>
+        </ui:define>
+        <ui:define name="button">
+            © Copyright 2012 Mando - Todos los derechos reservados
+        </ui:define>
+    </ui:composition>
+</html>

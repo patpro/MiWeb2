@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body >
+        <h:form id="form2">
+            <p:growl id="messages"/>
+            <h3>Mi Menú</h3>
+            <p:menu style="width: 170px">
+                <p:submenu label="Acciones" rendered="#{loginBean.menu.menu1}">
+                    <p:menuitem value="Vender" actionListener="#{buttonBean.save}" update="messages" icon="ui-icon-disk" rendered="#{loginBean.menu.menu1_1}" ajax="false"/>
+                    <p:menuitem value="Comprar" actionListener="#{buttonBean.update}" update="messages" icon="ui-icon-arrowrefresh-1-w" rendered="#{loginBean.menu.menu1_2}" ajax="false"/>
+                    <p:menuitem value="Realizar Pedido" actionListener="#{buttonBean.save}" update="messages" icon="ui-icon-disk" rendered="#{loginBean.menu.menu1_3}" ajax="false"/>
+                    <p:menuitem value="Consultar Pedido" actionListener="#{buttonBean.update}" update="messages" icon="ui-icon-arrowrefresh-1-w" rendered="#{loginBean.menu.menu1_4}" ajax="false"/>
+                    <p:menuitem value="Agregar Voucher" action="ingresarVoucher" icon="ui-icon-arrowrefresh-1-w" rendered="#{loginBean.menu.menu1_5}" ajax="false"/>
+                </p:submenu>
+                <p:submenu label="Personal" rendered="#{loginBean.menu.menu2}">
+                    <p:menuitem value="Cerrar Sesion" action="#{loginBean.cerrarSesion()}" icon="ui-icon-close" rendered="#{loginBean.menu.menu2_1}"/>
+                    <p:menuitem value="Perfil" actionListener="#{buttonBean.delete}" update="messages" ajax="false" icon="ui-icon-close" rendered="#{loginBean.menu.menu2_2}"/>
+                    <p:menuitem value="Agregar Vendedor" action="agregarVendedor" icon="ui-icon-close" rendered="#{loginBean.menu.menu2_3}" ajax="false"/>
+                    <p:menuitem value="Consultar Usuarios" action="consultarUsuarios" icon="ui-icon-close" rendered="#{loginBean.menu.menu2_4}" ajax="false"/>
+                </p:submenu>
+                <p:submenu label="Productos" rendered="#{loginBean.menu.menu3}">
+                    <p:menuitem value="Agregar Producto" action="agregarProductos" icon="ui-icon-home" rendered="#{loginBean.menu.menu3_1}" ajax="false"/>
+                    <p:menuitem value="Modifiar Producto" action="index" icon="ui-icon-star" rendered="#{loginBean.menu.menu3_2}" ajax="false"/>
+                    <p:menuitem value="Buscar Producto" action="consutaProductos" icon="ui-icon-home" rendered="#{loginBean.menu.menu3_3}" ajax="false"/>
+                    <p:menuitem value="Eliminar Producto" action="index" icon="ui-icon-star" rendered="#{loginBean.menu.menu3_4}" ajax="false"/>
+                </p:submenu>
+                <p:submenu label="Estadistica" rendered="#{loginBean.menu.menu4}">
+                    <p:menuitem value="Ventas en el Mes" action="index" icon="ui-icon-home" rendered="#{loginBean.menu.menu4_1}" ajax="false"/>
+                    <p:menuitem value="Ventas Vendedor" action="index" icon="ui-icon-star" rendered="#{loginBean.menu.menu4_2}" ajax="false"/>
+                </p:submenu>
+                <p:submenu label="Navegacion" rendered="#{loginBean.menu.menu5}">
+                    <p:menuitem value="Home" action="index" icon="ui-icon-home" rendered="#{loginBean.menu.menu5_1}" ajax="false"/>
+                    <p:menuitem value="Home" action="index" icon="ui-icon-home" rendered="#{loginBean.menu.menu5_2}" ajax="false"/>
+                    <p:menuitem value="Lo Nuevo" action="index" icon="ui-icon-star" rendered="#{loginBean.menu.menu5_3}" ajax="false"/>
+                    <p:menuitem value="Lo Mas Vendido" action="index" icon="ui-icon-home" rendered="#{loginBean.menu.menu5_4}" ajax="false"/>
+                    <p:menuitem value="Buscar" action="index" icon="ui-icon-star" rendered="#{loginBean.menu.menu5_5}" ajax="false"/>
+                </p:submenu>
+                <p:submenu label="Categorias Producto" rendered="#{loginBean.menu.menu6}">
+                    <p:menuitem value="Mantenimiento" action="ingresarCategoria" icon="ui-icon-home" rendered="#{loginBean.menu.menu6_1}" ajax="false"/>
+                    
+                </p:submenu>
+            </p:menu>
+            </h:form>
+    </h:body>
+</html>
+

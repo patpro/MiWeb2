@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="/Contenido/Publico/T_general.xhtml">
+        <ui:define name="top">
+            <h2>webStore - Administrador</h2>
+        </ui:define> 
+        
+        <ui:define name="Menu">
+            <ui:include src="/Contenido/Publico/menu.xhtml" />
+        </ui:define> 
+        
+        <ui:define name="right">
+            <p:fieldset legend="webStore - Administrador Administrador" style="height:505px;">
+            <h:panelGrid columns="2">
+                <p:imageSwitch effect="fade">
+                    <ui:repeat value="#{imageSwitchBean.images}" var="image">
+                        <p:graphicImage value="../resources/imagenes/#{image}" style="-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;"/>
+                    </ui:repeat>
+                </p:imageSwitch>
+                <p:fieldset legend="Administrador" >
+                    <h:outputText value="#{msg.txtAdministrador}" style="text-align: center;font-size: 22px;"/>
+                    </p:fieldset>
+            </h:panelGrid>
+           </p:fieldset>
+                    
+        </ui:define> 
+         <ui:define name="botton">
+            © Copyright 2012 - Todos los derechos reservados
+        </ui:define>  
+    </ui:composition>
+</html>

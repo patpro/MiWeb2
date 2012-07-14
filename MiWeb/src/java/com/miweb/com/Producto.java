@@ -10,9 +10,11 @@ import java.io.Serializable;
  *
  * @author Igor
  */
-public class Producto implements Serializable{
+public class Producto implements Serializable {
 
+    private int numeroOrden;
     private int idProducto;
+    private int nombreProducto;
     private int cantidad;
     private String descripcion;
     private double stock;
@@ -21,7 +23,7 @@ public class Producto implements Serializable{
     private int idCategoria;
 
     public Producto() {
-         estado=1;
+        estado = 1;
     }
 
     public int getCantidad() {
@@ -79,4 +81,21 @@ public class Producto implements Serializable{
     public void setStock(double stock) {
         this.stock = stock;
     }
+
+    public int getNombreProducto() {
+        return nombreProducto;
+    }
+
+    public void setNombreProducto(int nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+
+    public int getNumeroOrden() {
+        return numeroOrden;
+    }
+
+    public void setNumeroOrden(int numeroOrden) {
+        this.numeroOrden = numeroOrden;
+    }
+    
 }

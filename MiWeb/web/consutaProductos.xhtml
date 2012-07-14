@@ -23,9 +23,9 @@
                          
                 <p:dataTable id="dataTable" var="producto1" value="#{tableBean.productos}" widgetVar="productosTable" 
                     emptyMessage="No se encontrar autospara este criterio"
-                    paginator="true" rows="10"
+                    paginator="true" rows="2"
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="5,10,15">
+                         >
 
                 <f:facet name="header">
                     <p:outputPanel>
@@ -34,27 +34,33 @@
                     </p:outputPanel>
                 </f:facet>
 
-                <p:column id="tipoColumn" filterBy="#{producto1.tipo}" 
-                        headerText="Tipo" footerText="contains"
-                        filterMatchMode="contains">
-                    <h:outputText value="#{producto1.tipo}" />
+                <p:column id="tipoColumn" >
+                    <p:panel id="sports" header="Producto1" footer=" Precio :S/.29">
+                        <p:graphicImage value="../resources/imagenes/shoppingCar.png" width="80" height="80" /> 
+                    <p:commandButton id="selectButtonw" icon="ui-icon-cart" title="Editar " /> 
+                    </p:panel> 
+                      
                 </p:column>
 
-                <p:column id="cantidadColumn" filterBy="#{producto1.cantidad}"
-                        headerText="Cantidad" footerText="startsWith">
-                    <h:outputText value="#{producto1.cantidad}" />
+                <p:column id="cantidadColumn" >
+                    <p:panel id="sports4" header="Producto1" footer="Precio : S/.29">
+                    <p:graphicImage value="../resources/imagenes/shoppingCar.png" width="80" height="80" /> 
+                    <p:commandButton id="selectButton4" icon="ui-icon-cart" title="Editar " /> 
+                    </p:panel> 
                 </p:column>
 
-                <p:column id="descripcionColumn" filterBy="#{producto1.descripcion}" 
-                        headerText="Descripcion" footerText="exact"
-                        filterOptions="#{tableBean.manufacturerOptions}"
-                        filterMatchMode="exact">
-                    <h:outputText value="#{producto1.descripcion}" />
+                    <p:column id="descripcionColumn" >
+                   <p:panel id="sports3" header="Producto1" footer="Precio : S/.29">
+                    <p:graphicImage value="../resources/imagenes/shoppingCar.png" width="80" height="80" /> 
+                    <p:commandButton id="selectButton3" icon="ui-icon-cart" title="Editar " /> 
+                    </p:panel> 
                 </p:column>
 
-                <p:column id="precioColumn" filterBy="#{producto1.precio}"
-                        headerText="Precio" footerText="endsWith" filterMatchMode="endsWith">
-                    <h:outputText value="#{producto1.precio}" />
+                <p:column id="precioColumn" >
+                    <p:panel id="sports2" header="Producto1" footer="Precio : S/.29">
+                    <p:graphicImage value="../resources/imagenes/shoppingCar.png" width="80" height="80" /> 
+                    <p:commandButton id="selectButton2" icon="ui-icon-cart" title="Editar " /> 
+                    </p:panel> 
                 </p:column>
             </p:dataTable>
                 </p:panel>  

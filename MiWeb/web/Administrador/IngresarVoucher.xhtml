@@ -9,11 +9,11 @@
         <ui:define name="top">
             <h2>webStore - Administrador</h2>
         </ui:define> 
-        
+
         <ui:define name="Menu">
             <ui:include src="/Contenido/Publico/menu.xhtml" />
         </ui:define> 
-        
+
         <ui:define name="right">
             <p:fieldset legend="Agregar Voucher" style="height:505px;">
                 <h:panelGrid columns="1" cellpadding="10" style="width: 100%">
@@ -21,19 +21,51 @@
                         <p:growl id="messages" showDetail="true"/>
                         <p:panel>  
 
-                        <p:fileUpload fileUploadListener="#{fileUploadController.handleFileUpload}"
-                                mode="advanced" 
-                                update="messages"
-                                sizeLimit="100000" 
-                                allowTypes="/(\.|\/)(txt)$/"/>
+                            <p:fileUpload fileUploadListener="#{fileUploadController.handleFileUpload}"
+                                          mode="advanced" 
+                                          update="messages"
+                                          sizeLimit="100000" 
+                                          allowTypes="/(\.|\/)(txt)$/"/>
+                            <br></br>
+                            <p:dataTable id="dataTable" var="producto1" value="#{tableBean.productos}" widgetVar="productosTable" 
+                                         emptyMessage="No se encontrar autospara este criterio"
+                                         paginator="true" rows="5"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         >
 
+                                <f:facet name="header">
+                                    Lista de Voucher
+                                </f:facet>
 
+                                <p:column id="tipoColumn" filterBy="#{producto1.tipo}" 
+                                          headerText="Tipo" footerText="contains"
+                                          filterMatchMode="contains">
+                                    <h:outputText value="#{producto1.tipo}" />
+                                </p:column>
+
+                                <p:column id="cantidadColumn" filterBy="#{producto1.cantidad}"
+                                          headerText="Cantidad" footerText="startsWith">
+                                    <h:outputText value="#{producto1.cantidad}" />
+                                </p:column>
+
+                                <p:column id="descripcionColumn" filterBy="#{producto1.descripcion}" 
+                                          headerText="Descripcion" footerText="exact"
+                                          filterOptions="#{tableBean.manufacturerOptions}"
+                                          filterMatchMode="exact">
+                                    <h:outputText value="#{producto1.descripcion}" />
+                                </p:column>
+
+                                <p:column id="precioColumn" filterBy="#{producto1.precio}"
+                                          headerText="Precio" footerText="endsWith" filterMatchMode="endsWith">
+                                    <h:outputText value="#{producto1.precio}" />
+                                </p:column>
+                            </p:dataTable>       
                         </p:panel>      
                     </h:form>
                 </h:panelGrid>
             </p:fieldset>
         </ui:define> 
-         <ui:define name="botton">
+        <ui:define name="botton">
             © Copyright 2012 - Todos los derechos reservados
         </ui:define>  
     </ui:composition>

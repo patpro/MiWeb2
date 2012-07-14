@@ -40,7 +40,7 @@ public class UserWizard implements Serializable
 	public void save(ActionEvent actionEvent) {
 		//Persist user
 		
-		FacesMessage msg = new FacesMessage("Successful", "Welcome :" + user.getIdUsuario());
+		FacesMessage msg = new FacesMessage("Exito!", "Bienvenido :" + user.getIdUsuario());
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 	
@@ -54,7 +54,7 @@ public class UserWizard implements Serializable
 	
 	public String onFlowProcess(FlowEvent event) {
 		logger.info("Current wizard step:" + event.getOldStep());
-		logger.info("Next step:" + event.getNewStep());
+		logger.info("Siguiente:" + event.getNewStep());
 		
 		if(skip) {
 			skip = false;	//reset in case user goes back

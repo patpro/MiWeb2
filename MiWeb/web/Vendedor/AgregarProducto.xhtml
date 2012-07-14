@@ -15,14 +15,17 @@
         </ui:define>
 
         <ui:define name="right">
-            <p:panel>
+            <h:form id="form">
 
-                <p:fieldset legend="Ingresar Datos del Producto" style="margin: 5px 5px 20px 5px">
-                    <h:panelGrid columns="1" cellpadding="10" style="width: 100%">
-                        <h:form id="form">
-                            <p:growl id="msgs" showDetail="true" />
+                <p:panel>
 
-                            <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
+                    <p:fieldset legend="Ingresar Datos del Producto" style="margin: 5px 5px 20px 5px">
+
+                        <h:panelGrid columns="1" cellpadding="10" style="width: 100%">
+
+                            <p:growl id="msgs" showDetail="true"  sticky="true"/>
+
+                            <h:panelGrid id="ingresoProducto" columns="2" columnClasses="label, value" styleClass="grid">
 
                                 <h:outputText value="Cantidad:" styleClass="requiredLbl"/>
                                 <p:inputText value="#{mantenimientoProducto.producto.cantidad}" />
@@ -47,19 +50,115 @@
                                 </p:selectOneMenu>
                             </h:panelGrid>
 
-                            <p:commandButton id="btnGuardar" value="GUARDAR" actionListener="#{mantenimientoProducto.guardarProducto}"  partialSubmit="true" update="form"/>
-
-                        </h:form>
-                    </h:panelGrid>
-                </p:fieldset>
+                            <p:commandButton id="btnGuardar" value="GUARDAR" actionListener="#{mantenimientoProducto.guardarProducto}"  update="ingresoProducto,tableProductos,msgs"/>
 
 
+                        </h:panelGrid>
+                    </p:fieldset>
+                </p:panel>
+                <br/>
+                <p:panel>
+                    <p:fieldset legend="Lista de Productos">
+                        <h:panelGrid columns="1" cellpadding="10" style="width: 100%">
 
 
-            </p:panel>
+                            <!--  <p:growl id="msgs2" showDetail="true" />-->
+
+                            <p:dataTable id="tableProductos"
+                                         var="prod"
+                                         value="#{mantenimientoProducto.listProducto}"
+                                         paginator="true"
+                                         rows="5"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         style="margin: 5px 150px 5px 150px"
+
+                                         >
+                                <f:facet name="header">
+                                    Productos
+                                </f:facet>
+                                <p:column headerText="N°" style="width: 390px">
+                                    <h:outputText value="#{prod.numeroOrden}" />
+                                </p:column>
+
+                                <p:column headerText="Descripcion" style="width: 450px">
+                                    <h:outputText value="#{prod.descripcion}" />
+                                </p:column>
+
+                                <p:column headerText="Precio" style="width: 450px">
+                                    <h:outputText value="#{prod.precVenta}" />
+                                </p:column>
+
+                                <p:column headerText="Stock" style="width: 450px">
+                                    <h:outputText value="#{prod.stock}" />
+                                </p:column>
+
+                                <p:column style="width:30px">
+                                    <h:panelGrid columns="3" styleClass="actions" cellpadding="2">
+                                        <p:commandButton id="selectButton1"  update=":form:carDlg" oncomplete="carDialog.show()" icon="ui-icon-pencil" title="Editar Producto" >
+                                            <f:setPropertyActionListener value="#{prod}" target="#{mantenimientoProducto.productoTmp}" />
+                                        </p:commandButton>
+                                    </h:panelGrid>
+                                </p:column>
+
+                                <p:column style="width: 30px">
+
+                                    <p:commandButton id="btnEliminar" icon="ui-icon-close" onclick="confirmation.show()" type="button"/>
+                                    <p:confirmDialog id="confirmDialog" message="Estas seguro de eliminar producto?"
+                                                     header="Iniciando eliminacion" severity="alert" widgetVar="confirmation">
+                                        <center>
+                                            <p:commandButton id="confirm" value="Si, claro" update="tableProductos" oncomplete="confirmation.hide()"
+                                                             actionListener="#{mantenimientoProducto.eliminarProducto(event)}" ajax="false"/>
+                                            <p:commandButton id="decline" value="Aun no" onclick="confirmation.hide()" type="button" />
+                                        </center>
+                                    </p:confirmDialog>
+                                </p:column>
+
+
+
+                            </p:dataTable>
+                            <p:dialog header="Detalle de Usuario" widgetVar="carDialog" resizable="false" id="carDlg"
+                                      showEffect="fade" hideEffect="explode" modal="true" >
+
+                                <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">
+
+                                    <f:facet name="header">
+
+                                    </f:facet>
+
+                                    <h:outputText value="Cantidad:" styleClass="requiredLbl"/>
+                                    <p:inputText value="#{mantenimientoProducto.productoTmp.cantidad}" />
+
+                                    <h:outputText value="Descripcion:" styleClass="requiredLbl"/>
+                                    <p:inputTextarea value="#{mantenimientoProducto.productoTmp.descripcion}"
+                                                     styleClass="width:300px;"
+                                                     maxlength="499"/>
+
+                                    <h:outputText value="Stock: " styleClass="requiredLbl"/>
+                                    <p:inputText value="#{mantenimientoProducto.productoTmp.stock}" />
+
+                                    <h:outputText value="Precio de Venta: " styleClass="requiredLbl"/>
+                                    <p:inputText value="#{mantenimientoProducto.productoTmp.precVenta}" />
+                                    <h:outputText value="Categoria"/>
+                                    <p:selectOneMenu value="#{mantenimientoProducto.productoTmp.idCategoria}">
+                                        <f:selectItem itemLabel="Categoria" itemValue="-1"/>
+                                        <f:selectItems value="#{mantenimientoProducto.comboCategorias.listCategorias}" />
+                                    </p:selectOneMenu>
+
+                                </h:panelGrid>
+                                <br/>
+                                <center>
+                                    <p:commandButton id="btnActulizar" actionListener="#{mantenimientoProducto.actualizarProducto(event)}" value="ACTUALIZAR" update="tableProductos" oncomplete="carDialog.hide()" ajax="false"/>
+                                </center>
+                            </p:dialog>
+
+                        </h:panelGrid>
+                    </p:fieldset>
+                </p:panel>
+
+            </h:form>
         </ui:define>
-        <ui:define name="button">
-            © Copyright 2012 Mando - Todos los derechos reservados
+        <ui:define name="botton">
+            © Copyright 2012 - Todos los derechos reservados
         </ui:define>
     </ui:composition>
 </html>

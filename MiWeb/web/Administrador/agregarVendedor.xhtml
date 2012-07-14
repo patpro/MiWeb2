@@ -18,16 +18,16 @@
             
                    <p:growl id="messages" showDetail="true"/>
                     <h:form>
-                        <p:fieldset legend="Agregar Vendedor" style="height:505px;">
+                        <p:fieldset legend="Agregar Empleado" style="height:505px;">
                             <h:panelGrid columns="1" cellpadding="10" style="width: 100%">
                         <p:growl id="growl" sticky="true" showDetail="true"/>
 
                                     <p:wizard widgetVar="wiz"
                                                     flowListener="#{userWizard.onFlowProcess}">
 
-                                            <p:tab id="personal" title="Usuario">
+                                            <p:tab id="personal" title="Empleado">
 
-                                                    <p:panel header="Creación de Usuario">
+                                                    <p:panel header="Creación de Empleado">
 
                                                             <h:messages errorClass="error"/>
 
@@ -37,13 +37,12 @@
                                                                                     value="#{userWizard.user.idUsuario}" />
 
                                                                     <h:outputText value="Contraseña:" styleClass="requiredLbl"/>
-                                                                    <p:inputText required="true" label="Lastname"
-                                                                                    value="#{userWizard.user.idUsuario}" />
+                                                                    <p:password  required="true" label="Lastname" value="#{userWizard.user.idUsuario}" feedback="true"/> 
 
                                                                     <h:outputText value="Confirmar Contraseña: " styleClass="requiredLbl"/>
-                                                                    <p:inputText value="#{userWizard.user.idUsuario}" />
+                                                                    <p:password  required="true" label="Lastname" value="#{userWizard.user.idUsuario}"/>
 
-                                                                    <h:outputText value="Skip to last: " />
+                                                                    <h:outputText value="Saltar: " style="font-weight: bold;padding-right:10px;"/>
                                                                     <h:selectBooleanCheckbox value="#{userWizard.skip}" />
                                                             </h:panelGrid>
                                                     </p:panel>
@@ -55,16 +54,19 @@
                                                             <h:messages errorClass="error"/>
 
                                                             <h:panelGrid columns="2" columnClasses="label, value">
-                                                                    <h:outputText value="Street: " />
+                                                                    <h:outputText value="Nombres: " style="font-weight: bold;padding-right:10px;"/>
                                                                     <p:inputText value="#{userWizard.user.idUsuario}" />
 
-                                                                    <h:outputText value="Postal Code: " />
+                                                                    <h:outputText value="Apellidos: " style="font-weight: bold;padding-right:10px;"/>
                                                                     <p:inputText value="#{userWizard.user.idUsuario}" />
 
-                                                                    <h:outputText value="City: " />
-                                                                    <p:inputText value="#{userWizard.user.idUsuario}" />
-
-                                                                    <h:outputText value="Skip to last: " />
+                                                                    <h:outputText value="DNI: " style="font-weight: bold;padding-right:10px;"/>
+                                                                    <p:inputMask value="#{userWizard.user.idUsuario}" mask="99999999"/>
+                                                                    
+                                                                    <h:outputText value="Sexo: " style="font-weight: bold;padding-right:10px;"/>
+                                                                    <p:selectBooleanButton value="#{userWizard.user.idUsuario}" onLabel="Femenino" offLabel="Masculino" />
+                                                                    
+                                                                    <h:outputText value="Skip to last: " style="font-weight: bold;padding-right:10px;"/>
                                                                     <h:selectBooleanCheckbox value="#{userWizard.skip}" />
                                                             </h:panelGrid>
                                                     </p:panel>
@@ -76,14 +78,13 @@
                                                             <h:messages errorClass="error"/>
 
                                                             <h:panelGrid columns="2" columnClasses="label, value">
-                                                                    <h:outputText value="Email: *" />
-                                                                    <p:inputText required="true" label="Email"
-                                                                                    value="#{userWizard.user.idUsuario}" />
+                                                                <h:outputText value="Direccion: " style="font-weight: bold;padding-right:10px;" />
+                                                                    <p:inputText value="#{userWizard.user.idUsuario}" />
 
-                                                                    <h:outputText value="Phone: " />
-                                                                    <p:inputText value="#{userWizard.user.idUsuario}"/>
+                                                                    <h:outputText value="Telefono: " style="font-weight: bold;padding-right:10px;"/>
+                                                                    <p:inputMask value="#{userWizard.user.idUsuario}" mask="999-999-999"/>
 
-                                                                    <h:outputText value="Additional Info: " />
+                                                                    <h:outputText value="Email: " style="font-weight: bold;padding-right:10px;"/>
                                                                     <p:inputText value="#{userWizard.user.idUsuario}"/>
                                                             </h:panelGrid>
                                                     </p:panel>
@@ -92,40 +93,38 @@
                                             <p:tab id="confirm" title="Confirmacion">
                                                     <p:panel header="Confirmacion de Datos">
 
-                                                            <h:panelGrid id="confirmation" columns="6">
-                                                                    <h:outputText value="Firstname: " />
-                                                                    <h:outputText styleClass="outputLabel"
-                                                                                            value="#{userWizard.user.idUsuario}" />
+                                                            <h:panelGrid id="confirmation" columns="2">
+                                                                    <h:outputText value="Usuario: " style="font-weight: bold;padding-right:10px;"/>
+                                                                    <h:outputText styleClass="outputLabel" value="#{userWizard.user.idUsuario}" />
 
-                                                                    <h:outputText value="Lastname: " />
+                                                                    <h:outputText value="Password: " style="font-weight: bold;padding-right:10px;"/>
                                                                     <h:outputText  styleClass="outputLabel"
                                                                                             value="#{userWizard.user.idUsuario}"/>
 
-                                                                    <h:outputText value="Age: " />
-                                                                    <h:outputText styleClass="outputLabel"
-                                                                                            value="#{userWizard.user.idUsuario}" />>
+                                                                    <h:outputText value="Nombres: " style="font-weight: bold;padding-right:10px;"/>
+                                                                    <h:outputText styleClass="outputLabel" value="#{userWizard.user.idUsuario}" />
 
-                                                                    <h:outputText value="Street: " />
-                                                                    <h:outputText styleClass="outputLabel"
-                                                                                            value="#{userWizard.user.idUsuario}" />
-
-                                                                    <h:outputText value="Postal Code: " />
+                                                                    <h:outputText value="Apellidos: " style="font-weight: bold;padding-right:10px;"/>
                                                                     <h:outputText styleClass="outputLabel"
                                                                                             value="#{userWizard.user.idUsuario}" />
 
-                                                                    <h:outputText value="City: " />
+                                                                    <h:outputText value="DNI: " style="font-weight: bold;padding-right:10px;"/>
                                                                     <h:outputText styleClass="outputLabel"
                                                                                             value="#{userWizard.user.idUsuario}" />
 
-                                                                    <h:outputText value="Email: " />
+                                                                    <h:outputText value="Sexo: " style="font-weight: bold;padding-right:10px;"/>
                                                                     <h:outputText styleClass="outputLabel"
                                                                                             value="#{userWizard.user.idUsuario}" />
 
-                                                                    <h:outputText value="Phone " />
+                                                                    <h:outputText value="Direccion: " style="font-weight: bold;padding-right:10px;"/>
+                                                                    <h:outputText styleClass="outputLabel"
+                                                                                            value="#{userWizard.user.idUsuario}" />
+
+                                                                    <h:outputText value="Telefono " style="font-weight: bold;padding-right:10px;"/>
                                                                     <h:outputText styleClass="outputLabel"
                                                                                             value="#{userWizard.user.idUsuario}"/>
 
-                                                                    <h:outputText value="Info: " />
+                                                                    <h:outputText value="Email: " style="font-weight: bold;padding-right:10px;"/>
                                                                     <h:outputText styleClass="outputLabel"
                                                                                             value="#{userWizard.user.idUsuario}" />
 
@@ -133,7 +132,7 @@
                                                                     <h:outputText />
                                                             </h:panelGrid>
 
-                                                            <p:commandButton value="Submit" update="growl" 
+                                                            <p:commandButton value="Guardar" update="growl" 
                                                                                     actionListener="#{userWizard.save}"/>
 
                                                     </p:panel>

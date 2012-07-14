@@ -22,18 +22,17 @@
                         <h:panelGrid columns="1" cellpadding="10">
                             <p:growl id="messages" showDetail="true" />  
 
-                            <h:panelGrid id="ingresocateg" columns="2" columnClasses="label, value" styleClass="grid">
+                            <h:panelGrid id="ingresocateg" columns="3" columnClasses="label, value" styleClass="grid">
                                 <h:outputLabel value="Descripcion :" for="txt_title" styleClass="requiredLbl"></h:outputLabel>
-                                <p:inputText id="txt_title" value="#{mantenimientoCategoria.categoria.descripcion}" required="true"/>
+                                <p:inputText id="txt_title" value="#{mantenimientoCategoria.categoria.descripcion}"/>
 
                                 <p:commandButton id="confirm" value="Agregar" actionListener="#{mantenimientoCategoria.GuardarCategoria}" update="tablaCategorias,messages"/>
-                                <p:commandButton id="delete" value="Eliminar" actionListener="#{mantenimientoCategoria.EliminarCategoria}" update="tablaCategorias,messages" ajax="true"/>    
 
                             </h:panelGrid>
                         </h:panelGrid>
                     </p:fieldset>    
                 </p:panel>
-
+                <br/>
                 <p:panel>
                     <p:dataTable id="tablaCategorias" var="cate" value="#{mantenimientoCategoria.listaCategorias}" 
                                  paginator="true" rows="5" editable="true"
@@ -47,38 +46,51 @@
                         </p:column>
 
                         <p:column headerText="Descripcion">
-                            <p:inplace id="ajaxInplace" editor="true" >  
-                                <p:inputText value="#{cate.descripcion}" required="true" label="text" />
-                                <p:ajax event="save" onsuccess="#{mantenimientoCategoria.ActualizarCategoria(actionEvent)}"/>
-                            </p:inplace>
+                            <h:outputText value="#{cate.descripcion}" />
                         </p:column>
 
+                        <p:column style="width:100px">
+                            <p:commandButton id="selectButton1"  update=":form:carDlg1" oncomplete="carDialog1.show()" icon="ui-icon-pencil" title="Editar Producto">
+                                <f:setPropertyActionListener value="#{cate}" target="#{mantenimientoCategoria.categoriaTemp}" />
+                            </p:commandButton>
 
-                        <p:column style="width:30px">
-                            <h:panelGrid columns="2" styleClass="actions" cellpadding="2">
-                                <p:commandButton id="selectButton"  icon="ui-icon-pencil" title="Ver Detalle">
-                                </p:commandButton> 
-                            </h:panelGrid> 
+                            <p:commandButton id="btnEliminar" icon="ui-icon-close" onclick="confirmation.show()"/>
+                            <p:confirmDialog id="confirmDialog" message="¿Estas seguro de eliminar Categoria?"
+                                             header="Iniciando eliminacion" severity="alert" widgetVar="confirmation">
+                                <center>
+                                    <p:commandButton id="confirm" value="Si, claro" update="tablaCategorias" oncomplete="confirmation.hide()"
+                                                     actionListener="#{mantenimientoCategoria.EliminarCategoria(actionEvent)}" ajax="false"/>
+                                    <p:commandButton id="decline" value="Aun no" onclick="confirmation.hide()" type="button" ajax="false"/>
+                                </center>
+                            </p:confirmDialog>
                         </p:column>
+
+                        <!--     <p:column style="width:30px">
+                                 <h:panelGrid columns="2" styleClass="actions" cellpadding="2">
+                                     <p:commandButton id="selectButton"  icon="ui-icon-pencil" title="Ver Detalle">
+                                     </p:commandButton> 
+                                 </h:panelGrid> 
+                             </p:column> -->
 
                     </p:dataTable>
-                    <!-- <p:dialog header="Actualizar categoria" widgetVar="carDialog" resizable="false" id="carDlg"
-                                       showEffect="fade" hideEffect="explode" modal="true">
- 
-                                 <h:panelGrid id="display" columns="1" cellpadding="4" style="margin:0 auto;">
- 
-                                     <f:facet name="header"/>
-                                     
-                                     <h:outputText value="Categoria: " />
-                                     <p:inputText value="{mantenimientoCategoria.categoria.descripcion}" />
- 
- 
-                                 </h:panelGrid>
-                                 <br/>
-                                 <center>
-                                     <p:commandButton id="btnActulizar" actionListener="{mantenimientoCategoria.actualizarCategoria(actionEvent)}" value="ACTUALIZAR"/>
-                                 </center>
-                             </p:dialog> -->
+                    <p:dialog header="Actualizar Categoria" widgetVar="carDialog1" resizable="false" id="carDlg1"
+                              showEffect="fade" hideEffect="explode" modal="true">
+
+                        <h:panelGrid id="display1" columns="2" cellpadding="4" style="margin:0 auto;">
+
+                            <f:facet name="header"/>
+                            <h:outputText value="IdCategoria: " />
+                            <p:inputText value="#{mantenimientoCategoria.categoriaTemp.idcategoria}" disabled="true"/>    
+                            <h:outputText value="Categoria: " />
+                            <p:inputText value="#{mantenimientoCategoria.categoriaTemp.descripcion}" />
+
+
+                        </h:panelGrid>
+                        <br/>
+                        <center>
+                            <p:commandButton id="btnActulizar1" actionListener="#{mantenimientoCategoria.ActualizarCategoria(actionEvent)}" value="Actualizar" update="tablaCategorias" oncomplete="carDialog.hide()" ajax="false"/>
+                        </center>
+                    </p:dialog> 
                 </p:panel>
             </h:form>
 

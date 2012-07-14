@@ -26,13 +26,25 @@ import javax.faces.event.ActionEvent;
 public class MantenimientoCategoria implements Serializable {
 
     private Categoria categoria;
+    private Categoria categoriaTemp;
     private List<Categoria> listaCategorias = new ArrayList<Categoria>();
-
+    private boolean withConfirmation = true;
+    
     public MantenimientoCategoria() {
         categoria = new Categoria();
+        categoriaTemp = new Categoria();
         llenarTablaCategoria();
     }
 
+    public Categoria getCategoriaTemp() {
+        return categoriaTemp;
+    }
+
+    public void setCategoriaTemp(Categoria categoriaTemp) {
+        this.categoriaTemp = categoriaTemp;
+    }
+
+    
     public Categoria getCategoria() {
         return categoria;
     }
@@ -66,9 +78,8 @@ public class MantenimientoCategoria implements Serializable {
     public void ActualizarCategoria(ActionEvent actionEvent) {
         try 
         {
-            Modelo.Mantenimiento1Categoria(categoria, 2);
-            listaCategorias.add(categoria);
-            categoria= new Categoria();
+            Modelo.Mantenimiento1Categoria(categoriaTemp, 2);
+            
             FacesMessageUtils.addMensajeInfo("Actualizado correctamente");
         } catch (Exception es) {
             FacesMessageUtils.addMensajeError("Error: " + es.getMessage());
@@ -78,8 +89,8 @@ public class MantenimientoCategoria implements Serializable {
     
     public void EliminarCategoria(ActionEvent actionEvent) {
         try {
-            Modelo.Mantenimiento1Categoria(categoria, 2);
-            listaCategorias.remove(categoria);
+            Modelo.Mantenimiento1Categoria(categoriaTemp,3);
+            listaCategorias.remove(categoriaTemp);
             categoria= new Categoria();
             FacesMessageUtils.addMensajeInfo("Se Elimino correctamente");
         } catch (Exception es) {

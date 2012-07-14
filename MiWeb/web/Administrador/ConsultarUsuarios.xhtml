@@ -9,141 +9,167 @@
         <ui:define name="top">
             <h2>webStore - Administrador</h2>
         </ui:define> 
-        
+
         <ui:define name="Menu">
             <ui:include src="/Contenido/Publico/menu.xhtml" />
         </ui:define> 
-        
+
         <ui:define name="right">
             <p:panel>
-            <p:fieldset legend="Consultar Vendedores" style="margin: 5px 5px 20px 5px">
-                <h:panelGrid columns="1" cellpadding="10" style="width: 100%">
-            <h:form id="form">
-                
-           
-            <p:growl id="msgs" showDetail="true" />
-
-            <p:dataTable id="prod" var="prod" value="#{tableBean.productos}" 
-                         paginator="true" rows="5"
-                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="5,10,15"
-                         style="margin: 5px 150px 20px 150px"
-                        >
-                <f:facet name="header">
-                    Vendedores
-                </f:facet>
-                <p:column headerText="Usuario" style="width: 390px">
-                    <h:outputText value="#{prod.cantidad}" />
-                </p:column>
-
-                <p:column headerText="Nombre" style="width: 450px">
-                    <h:outputText value="#{prod.precio} #{prod.descripcion}" />
-                </p:column>
+                <p:fieldset legend="Consultar Vendedores" style="margin: 5px 5px 20px 5px">
+                    <h:panelGrid columns="1" cellpadding="10" style="width: 100%">
+                        <h:form id="form">
 
 
-                <p:column style="width:30px">
-                    <h:panelGrid columns="3" styleClass="actions" cellpadding="2">
-                        <p:commandButton id="selectButton" update=":form:display" oncomplete="carDialog.show()" icon="ui-icon-search" title="Ver Detalle">
-                            <f:setPropertyActionListener value="#{prod}" target="#{tableBean.selectedPro}" />
-                        </p:commandButton>
+                            <p:growl id="msgs" showDetail="true" />
+
+                            <p:dataTable id="prod" var="prod" value="#{tableBean.productos}" 
+                                         paginator="true" rows="5"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         style="margin: 5px 150px 20px 150px"
+                                         >
+                                <f:facet name="header">
+                                    Vendedores
+                                </f:facet>
+                                <p:column headerText="Usuario" style="width: 200px">
+                                    <h:outputText value="#{prod.cantidad}" />
+                                </p:column>
+
+                                <p:column headerText="Nombre" style="width: 350px">
+                                    <h:outputText value="#{prod.precio} #{prod.descripcion}" />
+                                </p:column>
+
+
+                                <p:column headerText="Acciones">
+                                    <p:panel>
+                                        <p:commandButton id="selectButton" update=":form:display" oncomplete="carDialog.show()" icon="ui-icon-search" title="Ver Detalle" style="margin: 2px">
+                                            <f:setPropertyActionListener value="#{prod}" target="#{tableBean.selectedPro}" />
+                                        </p:commandButton>
+
+                                        <p:commandButton id="selectButton2" update=":form:display" oncomplete="carDialog.show()" icon="ui-icon-pencil" title="Editar " style="margin: 2px">
+                                            <f:setPropertyActionListener value="#{prod}" target="#{tableBean.selectedPro}" />
+                                        </p:commandButton>
+
+                                        <p:commandButton id="btnEliminar" icon="ui-icon-close" onclick="confirmation.show()" type="button" title="Eliminar" style="margin: 5px" />
+                                        <p:confirmDialog id="confirmDialog" message="Estas seguro de eliminar producto?"
+                                                         header="Iniciando eliminacion" severity="alert" widgetVar="confirmation">
+                                            <center>
+                                                <p:commandButton id="confirm" value="Si, claro" update="tableProductos" oncomplete="confirmation.hide()"
+                                                                 actionListener="#{mantenimientoProducto.eliminarProducto(event)}" ajax="false"/>
+                                                <p:commandButton id="decline" value="Aun no" onclick="confirmation.hide()" type="button" />
+                                            </center>
+                                        </p:confirmDialog>
+                                    </p:panel>
+                                </p:column>
+
+                            </p:dataTable>
+
+                            <p:dialog header="Detalle de Usuario" widgetVar="carDialog" resizable="false" id="carDlg"
+                                      showEffect="fade" hideEffect="explode" modal="true">
+
+                                <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">
+
+                                    <f:facet name="header">
+
+                                    </f:facet>
+
+                                    <h:outputText value="Cantidad:" />
+                                    <h:outputText value="#{tableBean.selectedPro.cantidad}" style="font-weight:bold"/>
+
+                                    <h:outputText value="Precio:" />
+                                    <h:outputText value="#{tableBean.selectedPro.precio}" style="font-weight:bold"/>
+
+                                    <h:outputText value="Descripcion:" />
+                                    <h:outputText value="#{tableBean.selectedPro.descripcion}" style="font-weight:bold"/>
+
+                                    <h:outputText value="Tipo:" />
+                                    <h:outputText value="#{tableBean.selectedPro.tipo}" style="font-weight:bold"/>
+
+                                </h:panelGrid>
+
+                            </p:dialog>
+                        </h:form>
                     </h:panelGrid>
-                </p:column>
+                </p:fieldset>
 
-            </p:dataTable>
+                <p:fieldset legend="Consultar Clientes">
+                    <h:panelGrid columns="1" cellpadding="10" style="width: 100%">
+                        <h:form id="form3">
 
-            <p:dialog header="Detalle de Usuario" widgetVar="carDialog" resizable="false" id="carDlg"
-                        showEffect="fade" hideEffect="explode" modal="true">
+                            <p:growl id="msgs2" showDetail="true" />
 
-                <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">
+                            <p:dataTable id="prod2" var="prod" value="#{tableBean.productos}" 
+                                         paginator="true" rows="5"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         style="margin: 5px 150px 5px 150px"
+                                         >
+                                <f:facet name="header">
+                                    Clientes
+                                </f:facet>
+                                <p:column headerText="Usuario" style="width: 210px">
+                                    <h:outputText value="#{prod.cantidad}" />
+                                </p:column>
 
-                    <f:facet name="header">
-                        
-                    </f:facet>
-
-                    <h:outputText value="Cantidad:" />
-                    <h:outputText value="#{tableBean.selectedPro.cantidad}" style="font-weight:bold"/>
-
-                    <h:outputText value="Precio:" />
-                    <h:outputText value="#{tableBean.selectedPro.precio}" style="font-weight:bold"/>
-
-                    <h:outputText value="Descripcion:" />
-                    <h:outputText value="#{tableBean.selectedPro.descripcion}" style="font-weight:bold"/>
-
-                    <h:outputText value="Tipo:" />
-                    <h:outputText value="#{tableBean.selectedPro.tipo}" style="font-weight:bold"/>
-
-                </h:panelGrid>
-
-            </p:dialog>
-        </h:form>
-         </h:panelGrid>
-            </p:fieldset>
-            
-       <p:fieldset legend="Consultar Clientes">
-          <h:panelGrid columns="1" cellpadding="10" style="width: 100%">
-                <h:form id="form3">
-
-                    <p:growl id="msgs2" showDetail="true" />
-
-                    <p:dataTable id="prod2" var="prod" value="#{tableBean.productos}" 
-                                paginator="true" rows="5"
-                                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                rowsPerPageTemplate="5,10,15"
-                                style="margin: 5px 150px 5px 150px"
-                                >
-                        <f:facet name="header">
-                            Clientes
-                        </f:facet>
-                        <p:column headerText="Usuario" style="width: 390px">
-                            <h:outputText value="#{prod.cantidad}" />
-                        </p:column>
-
-                        <p:column headerText="Nombre" style="width: 450px">
-                            <h:outputText value="#{prod.precio} #{prod.descripcion}" />
-                        </p:column>
+                                <p:column headerText="Nombre" style="width: 350px">
+                                    <h:outputText value="#{prod.precio} #{prod.descripcion}" />
+                                </p:column>
 
 
-                        <p:column style="width:30px">
-                            <h:panelGrid columns="3" styleClass="actions" cellpadding="2">
-                                <p:commandButton id="selectButton" update=":form:display" oncomplete="carDialog.show()" icon="ui-icon-search" title="Ver Detalle">
-                                    <f:setPropertyActionListener value="#{prod}" target="#{tableBean.selectedPro}" />
-                                </p:commandButton>
-                            </h:panelGrid>
-                        </p:column>
+                                <p:column  headerText="Acciones">
+                                    <p:panel >
+                                        <p:commandButton id="selectButtonq" update=":form:display" oncomplete="carDialog.show()" icon="ui-icon-search" title="Ver Detalle" style="margin: 2px">
+                                            <f:setPropertyActionListener value="#{prod}" target="#{tableBean.selectedPro}" />
+                                        </p:commandButton>
 
-                    </p:dataTable>
+                                        <p:commandButton id="selectButtonw" update=":form:display" oncomplete="carDialog.show()" icon="ui-icon-pencil" title="Editar " style="margin: 2px">
+                                            <f:setPropertyActionListener value="#{prod}" target="#{tableBean.selectedPro}" />
+                                        </p:commandButton>
 
-                    <p:dialog header="Detalle de Usuario" widgetVar="carDialog" resizable="false" id="carDlg"
-                                showEffect="fade" hideEffect="explode" modal="true">
+                                        <p:commandButton id="btnEliminare" icon="ui-icon-close" onclick="confirmation.show()" type="button" title="Eliminar" style="margin: 5px" />
+                                        <p:confirmDialog id="confirmDialog" message="Estas seguro de eliminar producto?"
+                                                         header="Iniciando eliminacion" severity="alert" widgetVar="confirmation">
+                                            <center>
+                                                <p:commandButton id="confirm" value="Si, claro" update="tableProductos" oncomplete="confirmation.hide()"
+                                                                 actionListener="#{mantenimientoProducto.eliminarProducto(event)}" ajax="false"/>
+                                                <p:commandButton id="decline" value="Aun no" onclick="confirmation.hide()" type="button" />
+                                            </center>
+                                        </p:confirmDialog>
+                                    </p:panel>
+                                </p:column>
 
-                        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">
+                            </p:dataTable>
 
-                            <f:facet name="header">
+                            <p:dialog header="Detalle de Usuario" widgetVar="carDialog" resizable="false" id="carDlg"
+                                      showEffect="fade" hideEffect="explode" modal="true">
 
-                            </f:facet>
+                                <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">
 
-                            <h:outputText value="Cantidad:" />
-                            <h:outputText value="#{tableBean.selectedPro.cantidad}" style="font-weight:bold"/>
+                                    <f:facet name="header">
 
-                            <h:outputText value="Precio:" />
-                            <h:outputText value="#{tableBean.selectedPro.precio}" style="font-weight:bold"/>
+                                    </f:facet>
 
-                            <h:outputText value="Descripcion:" />
-                            <h:outputText value="#{tableBean.selectedPro.descripcion}" style="font-weight:bold"/>
+                                    <h:outputText value="Cantidad:" />
+                                    <h:outputText value="#{tableBean.selectedPro.cantidad}" style="font-weight:bold"/>
 
-                            <h:outputText value="Tipo:" />
-                            <h:outputText value="#{tableBean.selectedPro.tipo}" style="font-weight:bold"/>
+                                    <h:outputText value="Precio:" />
+                                    <h:outputText value="#{tableBean.selectedPro.precio}" style="font-weight:bold"/>
 
-                        </h:panelGrid>
+                                    <h:outputText value="Descripcion:" />
+                                    <h:outputText value="#{tableBean.selectedPro.descripcion}" style="font-weight:bold"/>
 
-                    </p:dialog>
+                                    <h:outputText value="Tipo:" />
+                                    <h:outputText value="#{tableBean.selectedPro.tipo}" style="font-weight:bold"/>
 
-                </h:form> 
-                </h:panelGrid>
-            </p:fieldset>
-        </p:panel> 
+                                </h:panelGrid>
+
+                            </p:dialog>
+
+                        </h:form> 
+                    </h:panelGrid>
+                </p:fieldset>
+            </p:panel> 
         </ui:define> 
-         <ui:define name="botton">
+        <ui:define name="botton">
             © Copyright 2012 - Todos los derechos reservados
         </ui:define>  
     </ui:composition>

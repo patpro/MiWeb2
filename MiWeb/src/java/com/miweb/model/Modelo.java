@@ -35,10 +35,8 @@ public class Modelo {
         cstmt.setInt(6, producto.getEstado());
         cstmt.setInt(7, producto.getIdCategoria());
 
-
         System.out.println(producto.getIdProducto());
         cstmt.registerOutParameter(1, Types.INTEGER);
-
         cstmt.execute();
         producto.setIdProducto(cstmt.getInt(1));
         correlativo = cstmt.getInt(1);
@@ -47,6 +45,90 @@ public class Modelo {
 
 
         return correlativo;
+    }
+
+    public static ArrayList<Producto> cargarProductos() throws Exception {
+
+        ArrayList<Producto> listaProductos = new ArrayList<Producto>();
+        Producto producto = null;
+        Connection cnn = null;
+        Statement stmt;
+        ResultSet rs;
+        String sql = "";
+        int i = 0;
+
+        try {
+            cnn = conexion.getConnection();
+            stmt = cnn.createStatement();
+
+            sql = "select IdProducto,Descripcion,PVenta,Stock from producto where Estado=1";
+
+            //logger.debug(sql);
+            rs = stmt.executeQuery(sql);
+            listaProductos = new ArrayList<Producto>();
+
+            while (rs.next()) {
+                i++;
+                producto = new Producto();
+                producto.setIdProducto(rs.getInt("IdProducto"));
+                producto.setDescripcion(rs.getString("Descripcion"));
+                producto.setPrecVenta(rs.getDouble("PVenta"));
+                producto.setStock(rs.getDouble("Stock"));
+                producto.setNumeroOrden(i);
+                listaProductos.add(producto);
+
+            }
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException e) {
+            //logger.error(e.getMessage(), e);
+            throw new Exception(e.getMessage());
+        } catch (Exception e) {
+            //logger.error(e.getMessage(), e);
+            throw new Exception(e.getMessage());
+        } finally {
+            try {
+                if (cnn != null && !cnn.isClosed()) {
+                    cnn.close();
+                }
+            } catch (Exception e) {
+                throw new Exception(e.getMessage());
+            }
+        }
+
+        return listaProductos;
+    }
+
+    public static void eliminarProducto(int codProducto) throws Exception{
+        Connection cnn = null;
+        Statement cstmt;
+
+        try {
+            cnn = conexion.getConnection();
+            cstmt = cnn.createStatement();
+
+            String sql = "delete from producto where IdProducto="+codProducto+" ";
+
+
+            cstmt.executeUpdate(sql);
+            cstmt.close();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            throw new Exception(e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new Exception(e.getMessage());
+        } finally {
+            try {
+                if (cnn != null && !cnn.isClosed()) {
+                    cnn.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
     
     public static void Mantenimiento1Categoria(Categoria cat,int op) throws Exception 
@@ -74,9 +156,9 @@ public class Modelo {
                 break;
                 case 3:
                 {
-                    String query = "DELETE FROM categoria WHERE descripcion=?";
+                    String query = "DELETE FROM categoria WHERE idcategoria= ?";
                     pstmt = cnn.prepareStatement(query); // create a statement
-                    pstmt.setString(1, cat.getDescripcion());
+                    pstmt.setInt(1, cat.getIdcategoria());
                 }
                 break;
             }

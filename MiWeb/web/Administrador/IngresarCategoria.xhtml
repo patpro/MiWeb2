@@ -27,7 +27,7 @@
                                 <p:inputText id="txt_title" value="#{mantenimientoCategoria.categoria.descripcion}" required="true"/>
 
                                 <p:commandButton id="confirm" value="Agregar" actionListener="#{mantenimientoCategoria.GuardarCategoria}" update="tablaCategorias,messages"/>
-                                <p:commandButton id="delete" value="Eliminar" actionListener="#{mantenimientoCategoria.EliminarCategoria}" ajax="true"/>    
+                                <p:commandButton id="delete" value="Eliminar" actionListener="#{mantenimientoCategoria.EliminarCategoria}" update="tablaCategorias,messages" ajax="true"/>    
 
                             </h:panelGrid>
                         </h:panelGrid>
@@ -36,7 +36,7 @@
 
                 <p:panel>
                     <p:dataTable id="tablaCategorias" var="cate" value="#{mantenimientoCategoria.listaCategorias}" 
-                                 paginator="true" rows="5"
+                                 paginator="true" rows="5" editable="true"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  >
                         <f:facet name="header">
@@ -47,7 +47,10 @@
                         </p:column>
 
                         <p:column headerText="Descripcion">
-                            <h:outputText value="#{cate.descripcion}" />
+                            <p:inplace id="ajaxInplace" editor="true" >  
+                                <p:inputText value="#{cate.descripcion}" required="true" label="text" />
+                                <p:ajax event="save" onsuccess="#{mantenimientoCategoria.ActualizarCategoria(actionEvent)}"/>
+                            </p:inplace>
                         </p:column>
 
 
@@ -59,23 +62,23 @@
                         </p:column>
 
                     </p:dataTable>
-                   <!-- <p:dialog header="Actualizar categoria" widgetVar="carDialog" resizable="false" id="carDlg"
-                                      showEffect="fade" hideEffect="explode" modal="true">
-
-                                <h:panelGrid id="display" columns="1" cellpadding="4" style="margin:0 auto;">
-
-                                    <f:facet name="header"/>
-                                    
-                                    <h:outputText value="Categoria: " />
-                                    <p:inputText value="{mantenimientoCategoria.categoria.descripcion}" />
-
-
-                                </h:panelGrid>
-                                <br/>
-                                <center>
-                                    <p:commandButton id="btnActulizar" actionListener="{mantenimientoCategoria.actualizarCategoria(actionEvent)}" value="ACTUALIZAR"/>
-                                </center>
-                            </p:dialog> -->
+                    <!-- <p:dialog header="Actualizar categoria" widgetVar="carDialog" resizable="false" id="carDlg"
+                                       showEffect="fade" hideEffect="explode" modal="true">
+ 
+                                 <h:panelGrid id="display" columns="1" cellpadding="4" style="margin:0 auto;">
+ 
+                                     <f:facet name="header"/>
+                                     
+                                     <h:outputText value="Categoria: " />
+                                     <p:inputText value="{mantenimientoCategoria.categoria.descripcion}" />
+ 
+ 
+                                 </h:panelGrid>
+                                 <br/>
+                                 <center>
+                                     <p:commandButton id="btnActulizar" actionListener="{mantenimientoCategoria.actualizarCategoria(actionEvent)}" value="ACTUALIZAR"/>
+                                 </center>
+                             </p:dialog> -->
                 </p:panel>
             </h:form>
 

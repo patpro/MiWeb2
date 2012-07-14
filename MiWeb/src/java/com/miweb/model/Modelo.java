@@ -66,9 +66,10 @@ public class Modelo {
                 break;
                 case 2:
                 {
-                    String query = "";
+                    String query = "UPDATE categoria SET descripcion = ? WHERE idcategoria= ?;";
                     pstmt = cnn.prepareStatement(query); // create a statement
                     pstmt.setString(1, cat.getDescripcion());
+                    pstmt.setInt(2, cat.getIdcategoria());
                 }
                 break;
                 case 3:

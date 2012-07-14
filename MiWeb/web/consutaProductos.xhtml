@@ -9,66 +9,55 @@
         <ui:define name="top">
             <h2>Consulta de Productos</h2>
         </ui:define> 
-        
+
         <ui:define name="Menu">
             <ui:include src="Contenido/Publico/menu.xhtml" />
         </ui:define> 
-        
+
         <ui:define name="right">
-            
+
             <p:fieldset legend="Consultar Productos">
-                <h:panelGrid columns="1" cellpadding="10" style="width: 100%">
-            <h:form>
-                <p:panel  > 
-                         
-                <p:dataTable id="dataTable" var="producto1" value="#{tableBean.productos}" widgetVar="productosTable" 
-                    emptyMessage="No se encontrar autospara este criterio"
-                    paginator="true" rows="2"
-                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         >
+                <h:panelGrid columns="1" cellpadding="10" style="width: 70%">
+                    <h:form>
+                        <p:panel  > 
 
-                <f:facet name="header">
-                    <p:outputPanel>
-                        <h:outputText value="Buscar por campo:" />
-                        <p:inputText id="globalFilter" onkeyup="productosTable.filter()" style="width:150px" />
-                    </p:outputPanel>
-                </f:facet>
+                            <p:dataTable id="dataTable" var="prod" value="#{mantenimientoProducto.listProducto}" widgetVar="productosTable" 
+                                         emptyMessage="No se encontrar autospara este criterio"
+                                         paginator="true" rows="2"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         >
 
-                <p:column id="tipoColumn" >
-                    <p:panel id="sports" header="Producto1" footer=" Precio :S/.29">
-                        <p:graphicImage value="../resources/imagenes/shoppingCar.png" width="80" height="80" /> 
-                    <p:commandButton id="selectButtonw" icon="ui-icon-cart" title="Editar " /> 
-                    </p:panel> 
-                      
-                </p:column>
+                                <f:facet name="header">
+                                    <p:outputPanel>
+                                        <h:outputText value="Buscar por campo:" />
+                                        <p:inputText id="globalFilter" onkeyup="productosTable.filter()" style="width:150px" />
+                                    </p:outputPanel>
+                                </f:facet>
 
-                <p:column id="cantidadColumn" >
-                    <p:panel id="sports4" header="Producto1" footer="Precio : S/.29">
-                    <p:graphicImage value="../resources/imagenes/shoppingCar.png" width="80" height="80" /> 
-                    <p:commandButton id="selectButton4" icon="ui-icon-cart" title="Editar " /> 
-                    </p:panel> 
-                </p:column>
+                                <p:column id="tipoColumn" >
+                                    <p:panel id="sports" header="#{prod.descripcion}" footer=" Precio :S/#{prod.precVenta}">
+                                        <p:graphicImage value="../resources/imagenes/shoppingCar.png" width="80" height="80" /> 
+                                    </p:panel> 
 
-                    <p:column id="descripcionColumn" >
-                   <p:panel id="sports3" header="Producto1" footer="Precio : S/.29">
-                    <p:graphicImage value="../resources/imagenes/shoppingCar.png" width="80" height="80" /> 
-                    <p:commandButton id="selectButton3" icon="ui-icon-cart" title="Editar " /> 
-                    </p:panel> 
-                </p:column>
+                                </p:column>
 
-                <p:column id="precioColumn" >
-                    <p:panel id="sports2" header="Producto1" footer="Precio : S/.29">
-                    <p:graphicImage value="../resources/imagenes/shoppingCar.png" width="80" height="80" /> 
-                    <p:commandButton id="selectButton2" icon="ui-icon-cart" title="Editar " /> 
-                    </p:panel> 
-                </p:column>
-            </p:dataTable>
-                </p:panel>  
-        </h:form>
-                    </h:panelGrid>
+                                <p:column id="cantidadColumn" rowspan="2" >
+                                    <h:outputText value="Nombre:" />
+                                    <h:outputText value="#{prod.descripcion}" />
+                                    <br></br>
+                                    <h:outputText value="Comprar:" />
+                                    <p:commandButton id="selectButton4" icon="ui-icon-cart" title="Editar " /> 
+
+                                </p:column>
+
+
+                            </p:dataTable>
+                        </p:panel>  
+                    </h:form>
+                </h:panelGrid>
             </p:fieldset>
         </ui:define> 
-         <ui:define name="button">
+        <ui:define name="button">
             © Copyright 2012 - Todos los derechos reservados
         </ui:define>  
     </ui:composition>

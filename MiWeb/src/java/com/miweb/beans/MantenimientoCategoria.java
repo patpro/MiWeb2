@@ -79,7 +79,6 @@ public class MantenimientoCategoria implements Serializable {
         try 
         {
             Modelo.Mantenimiento1Categoria(categoriaTemp, 2);
-            
             FacesMessageUtils.addMensajeInfo("Actualizado correctamente");
         } catch (Exception es) {
             FacesMessageUtils.addMensajeError("Error: " + es.getMessage());

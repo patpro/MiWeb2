@@ -21,11 +21,11 @@
                         <p:growl id="messages" showDetail="true"/>
                         <p:panel>  
 
-                            <p:fileUpload fileUploadListener="#{fileUploadController.handleFileUpload}"
-                                          mode="advanced" 
-                                          update="messages"
-                                          sizeLimit="100000" 
-                                          allowTypes="/(\.|\/)(txt)$/"/>
+                            <p:fileUpload fileUploadListener="#{fileUploadController.upload}" multiple="true"
+                                          allowTypes="/(\.|\/)(txt)$/" sizeLimit="100000"
+                                          invalidFileMessage="fichero inválido" invalidSizeMessage="ha excedido el tamaño máximo permitido"
+                                          label="Seleccionar Archivo" cancelLabel="Cancelar" uploadLabel="Subir" />
+
                             <br></br>
                             <p:dataTable id="dataTable" var="producto1" value="#{tableBean.productos}" widgetVar="productosTable" 
                                          emptyMessage="No se encontrar autospara este criterio"
